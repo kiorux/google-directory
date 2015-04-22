@@ -1,3 +1,4 @@
+require "google-directory/version"
 require "google-directory/config"
 require 'google/api_client'
 
