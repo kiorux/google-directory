@@ -19,16 +19,19 @@ First configure your API in `initializers/google_directory.rb`
 
 ``` ruby
 GoogleDirectory.configure do
-
+	
+	# Optional Token Store
 	use_yaml Rails.root.join('config', 'google_directory.yaml')
 
+	# Required 
 	admin_email 'admin@domain.com'
-
 	key_file Rails.root.join('config', 'keys', 'private_key.p12')
-
 	key_passphrase 'notasecret'
-
 	issuer 'xxxxxxx@developer.gserviceaccount.com'
+
+	# Optional attributes
+	application_name 'My Application'
+	application_version '1.0.0'
 
 end
 ```
@@ -50,7 +53,7 @@ Specify a scope in the configuration `initializers/google_directory.rb`.
 
 ``` ruby
 GoogleDirectory.configure do
-
+	
 	use_yaml Rails.root.join('config', 'google_directory.yaml')
 
 	scope :domain_one do

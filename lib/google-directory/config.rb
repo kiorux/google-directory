@@ -26,10 +26,12 @@ module GoogleDirectory
 
 	class Config
 
-		attr_reader :admin_email, :key_passphrase, :issuer, :key_file, :scope_name
+		attr_reader :admin_email, :key_passphrase, :issuer, :key_file, :scope_name, :application_version, :application_name
 
 		def initialize(scope_name = :main)
 			@scope_name = scope_name
+			@application_name = 'Google Directory API'
+			@application_version = GoogleDirectory::VERSION
 		end
 
 		def using(scope)
@@ -90,6 +92,14 @@ module GoogleDirectory
 
 			def issuer( issuer )
 				@current_config.instance_variable_set('@issuer', issuer)
+			end
+
+			def application_name( application_name )
+				@current_config.instance_variable_set('@application_name', application_name)
+			end
+
+			def application_version( application_version )
+				@current_config.instance_variable_set('@application_version', application_version)
 			end
 
 			def scope( scope_name, &block )

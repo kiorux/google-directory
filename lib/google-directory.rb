@@ -13,7 +13,7 @@ module GoogleDirectory
 
             
             @key = Google::APIClient::KeyUtils.load_from_pkcs12(@config.key_file, @config.key_passphrase)
-            @client = Google::APIClient.new(:application_name => 'Saeko Directory API', :application_version => '1.0.0')
+            @client = Google::APIClient.new(:application_name => @config.application_name, :application_version => @config.application_version )
 
             @client.authorization = Signet::OAuth2::Client.new(
                 :token_credential_uri => 'https://accounts.google.com/o/oauth2/token',
@@ -26,7 +26,7 @@ module GoogleDirectory
 
             if token = @config.load_token
 
-                token['issued_at'] = DateTime.parse( token['issued_at'] )
+                token['issued_at'] = Time.parse( token['issued_at'] )
                 @client.authorization.update_token!(token)
 
             else
