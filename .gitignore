@@ -2,6 +2,10 @@
 .DS_Store
 .bundle
 .rvmrc
-Gemfile.lock
 *.log
-/test/**
+*.gem
+
+test/*
+pkg/*
+
+Gemfile.lock
