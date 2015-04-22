@@ -26,7 +26,7 @@ module GoogleDirectory
 
             if token = @config.load_token
 
-                token[:issued_at] = DateTime.parse( token[:issued_at] )
+                token['issued_at'] = DateTime.parse( token['issued_at'] )
                 @client.authorization.update_token!(token)
 
             else
