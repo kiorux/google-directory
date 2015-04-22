@@ -43,7 +43,7 @@ module GoogleDirectory
 		# access_token:
 		# expires_in:
 		def save_token(token_hash)
-			token_hash = token_hash.slice(:token_type, :issued_at, :access_token, :expires_in)
+			token_hash = token_hash.slice('token_type', 'issued_at', 'access_token', 'expires_in')
 			@token_store and @token_store.save(@scope_name, token_hash)
 		end
 
@@ -118,12 +118,12 @@ module GoogleDirectory
 
 		def save( scope_name, token_hash )
 			data = (@yaml_data[Rails.env.to_s] ||= {})
-			data[scope_name.to_s] = token_hash.stringify_keys
+			data[scope_name.to_s] = token_hash
 			File.open(@yaml_file, 'w') { |file| file.write( YAML::dump(@yaml_data) ) }
 		end
 
 		def load( scope_name )
-			data = @yaml_data[Rails.env.to_s] and data = data[scope_name.to_s] and data.symbolize_keys.slice(:token_type, :issued_at, :access_token, :expires_in)
+			data = @yaml_data[Rails.env.to_s] and data = data[scope_name.to_s] and data.slice('token_type', 'issued_at', 'access_token', 'expires_in')
 		end
 
 	end
