@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
 	
 	s.authors     = ["Omar Osorio"]
 	s.email       = ["omar@kioru.com"]
-	s.homepage    = "https://github.com/kiomac/google-directory"
+	s.homepage    = "https://github.com/kioru/google-directory"
 
 	s.summary     = "Simple Google Directory API client wrapper for Rails"
 	s.description = "Relying on the Google Ruby API gem you are able to set up a Rails project for consuming the Directory API (or the Admin SDK). Even multiple domain access is possible using scopes."
@@ -21,6 +21,4 @@ Gem::Specification.new do |s|
 	s.require_paths = ['lib']
 
 	s.add_dependency 'google-api-client', '~> 0.8'
-
-	s.add_development_dependency "sqlite3"
 end
