@@ -6,7 +6,7 @@ module GoogleDirectory
 
 	class Client
 
-		attr_reader :directory_api, :client, :config
+		attr_reader :directory_api, :client, :config, :result
 
 		def initialize(scope = :main)
 			@config = GoogleDirectory.configuration
@@ -84,12 +84,17 @@ module GoogleDirectory
 					config.save_token(token)
 				end
 
-				result = client.execute(opts)
-				return JSON.parse(result.body) if result.status == 200
-				return nil if [204, 404].include?(result.status)
+				@result = client.execute(opts)
+				
+				case result.status
+				when 204 then return true
+				when 404 then return false
+				when 200 then return JSON.parse(result.body)
+				end
 
 				Rails.logger.error("== Google ERROR ==\n\t- execute(#{opts})\n\t- response:\n#{result.response.to_yaml}")
 
+				false
 			end
 	end
 
